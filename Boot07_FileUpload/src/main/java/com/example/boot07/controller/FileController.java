@@ -142,4 +142,12 @@ public class FileController {
 		
 		return "file/upload2";
 	}
+	// [Spring Controller] 에서 일어나는 일
+	// 1. 폼 전송 파라미터로 전달되는 값을 모두 추출
+	// string title , MultipartFile myFile
+	// 2. FileDto 객체를 생성해서 추룰된 파라미터를 setter 메소드를 이용해서 저장
+	// FileDto dto = new FileDto()
+	// dto.setTitle(title);
+	// dto.setMyFile(myFile);
+	// 3. FileDto 객체의 참조값을 컨트롤러의 매개 변수에 전달해준다.
 }
