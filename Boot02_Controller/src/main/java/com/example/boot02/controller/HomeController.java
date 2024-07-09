@@ -86,7 +86,6 @@ public class HomeController {
 		return "동쪽으로 가면 귀인을 만나요";
 	}
 	
-	
 }
 
 
