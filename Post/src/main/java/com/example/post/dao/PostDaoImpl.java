@@ -19,6 +19,19 @@ public class PostDaoImpl implements PostDao{
 		List<PostDto> list = session.selectList("post.getList");
 		return list;
 	}
+
+	@Override
+	public void insert(PostDto dto) {
+		session.insert("post.insert", dto);
+		
+	}
+
+	@Override
+	public PostDto getData(int id) {
+		PostDto dto = session.selectOne("post.getData", id);
+		
+		return dto;
+	}
 	
 	
 }

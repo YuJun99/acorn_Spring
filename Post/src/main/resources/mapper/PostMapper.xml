@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="post">
+
+	<select id="getList" resultType="PostDto">
+		SELECT id, title, author
+		FROM board_post
+		ORDER BY id ASC
+	</select>
 	
+	<insert id="insert" parameterType="PostDto">
+		INSERT INTO board_post
+		(id, title, author)
+		VALUES(board_post_seq.nextval, #{title }, #{author})
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_post
+		WHERE id=#{id }
+	</delete>
+	
+	<select id="getData" parameterType="int" resultType="PostDto">
+		SELECT id, title, author
+		FROM board_post
+		WHERE id = #{id }
+	</select>
 </mapper>

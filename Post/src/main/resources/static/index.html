@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>templates/home.html</title>
+</head>
+<body>
+	<div class="container">
+		<h1>인덱스 페이지</h1>
+		<a href="/post/get">GET 방식 /posts 리스트</a>
+		<a href="/post/list">list</a>
+	</div>
+	<form action="/post/getData" method="get">
+		<label for="id">GET 번호</label>
+		<input type="number" name="id" id="id"/>
+		<button type="submit">제출</button>
+	</form>
+	<br />
+	<form action="/post/insert" method="post">
+		<h3>POST</h3>
+		<label for="title">POST 제목</label>
+		<input type="text" name="title"/>	<br />
+		<label for="author">POST 작성자</label> 
+		<input type="text" name=author/> <br />
+		<button type="submit">추가</button>
+	</form>
+	<br />
+	<form action="">
+		<label for="">DELETE 번호</label>
+		<input type="number" />
+		<button type="submit">제출</button>
+	</form>
+	<br />
+	<form action="">
+		<label for="">PUT 번호</label>
+		<input type="number" />
+		<button type="submit">제출</button>
+	</form>
+	
+</body>
+</html>
