@@ -13,7 +13,7 @@ public class SecurityConfig {
 	@Bean //메소드에서 리턴되는 SecurityFilterChain 을 bean 으로 만들어 준다.
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		String[] whiteList = {"/", "/user/loginform", "/user/login_fail", "/user/expired",
-				"/user/signup_form", "/user/signup", "/error"};
+				"/user/signup_form", "/user/signup", "/error", ".upload/images/*"};
 		httpSecurity
 		.csrf(csrf->csrf.disable())
 		.authorizeHttpRequests(config ->

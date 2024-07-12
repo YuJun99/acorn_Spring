@@ -1,5 +1,7 @@
 package com.example.boot11.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,5 +35,6 @@ public class UserDto {
 	private String role;
 	private String profile;
 	private String regdate;
-	
+	//프로필 이미 파일 업로드 처리를 하기 위한 필드
+	private MultipartFile image; // <input type = "file" name="image" > 임으로 필드명이 image 이다.
 }

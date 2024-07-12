@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>/file/list.html</title>
+</head>
+<body>
+	<div class="container">
+		<a th:href="@{/file/upload_form}">파일 업로드</a>
+		<h1>파일 목록 입니다</h1>
+		<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>작성자</th>
+					<th>제목</th>
+					<th>파일이름</th>
+					<th>등록일</th>
+					<th>다운</th>
+					<th>삭제</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="tmp : ${list}">
+					<td>[[${tmp.num}]]</td>
+					<td th:text="${tmp.writer}"></td>
+					<td th:text="${tmp.title}"></td>
+					<td th:text="${tmp.orgFileName}"></td>
+					<td th:text="${tmp.regdate}"></td>
+					<td><a th:href="@{/file/download(num=${tmp.num})}">다운</a></td>
+					<td><a th:href="@{/file/delete(num=${tmp.num})}">삭제</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

@@ -17,7 +17,22 @@ public class UserController {
 	
 	@Autowired private UserService service;
 	
-	@PostMapping("/user/pwd_updateform")
+	@PostMapping("/user/update")
+	public String update(UserDto dto) {
+		service.updateUser(dto);
+		//개인 정보 보기로 다시 리다일렉트 시킨다
+		return "redirect:/user/info";
+	}
+	
+	@GetMapping("/user/updateform")
+	public String updateForm(Model model) {
+		//Model 에 UserDto 가 담기도록 서비스 메소드에 전달한다
+		service.getInfo(model);
+		
+		return "user/updateform";
+	}
+	
+	@PostMapping("/user/pwd_update")
 	public String pwdUpdate(UserDto dto, HttpSession session) {
 		//비밀번호 수정 이후
 		service.updatePassword(dto);
