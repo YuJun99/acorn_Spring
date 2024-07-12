@@ -13,7 +13,7 @@ public class SecurityConfig {
 	@Bean //메소드에서 리턴되는 SecurityFilterChain 을 bean 으로 만들어 준다.
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
 		String[] whiteList = {"/", "/user/loginform", "/user/login_fail", "/user/expired",
-				"/user/signup_form", "/user/signup", "/error"};
+				"/user/signup_form", "/user/signup", "/error", ".upload/images/*"};
 		httpSecurity
 		.csrf(csrf->csrf.disable())
 		.authorizeHttpRequests(config ->
@@ -43,7 +43,7 @@ public class SecurityConfig {
 				.permitAll()
 		)
 		.exceptionHandling(config ->
-			//403 forbidden 인 경구 forward 이동 시킬 경로 설정
+			//403 forbidden 인 경우 forward 이동 시킬 경로 설정
 			config.accessDeniedPage("/user/denied")
 		)
 		.sessionManagement(config->
