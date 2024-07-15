@@ -29,6 +29,11 @@
 				</tr>
 			</tbody>
 		</table>
+		<ul>
+			<li th:each="tmp:${list}">
+				<a th:href="" th:text="${tmp.getcount}"></a>
+			</li>
+		</ul>
 	</div>
 </body>
 </html>

@@ -8,20 +8,45 @@ import org.springframework.stereotype.Repository;
 
 import com.example.boot11.dto.FileDto;
 
-@Repository
+@Repository //bean 으로 만들기 위해
 public class FileDaoImpl implements FileDao{
-
+	//mybatis 기반의 dao 에서 필요한 객체
 	@Autowired private SqlSession session;
 	
 	@Override
 	public List<FileDto> getList() {
+		/*
+		 * parameterType : 없다
+		 * resultType : FileDto
+		 * 
+		 * selectList() 메소드는 무조건 List type 을 리턴하고
+		 * List 의 Generic tpye 은 mapper xml 에서 설정한 result type 과 같다.
+		 */
 		List<FileDto> list = session.selectList("file.getList");
 		return list;
 	}
 
 	@Override
-	public void upload(FileDto dto) {
-		session.insert("file.upload", dto);
+	public void insert(FileDto dto) {
+		session.insert("file.insert", dto);
+	}
+
+	@Override
+	public FileDto getData(int num) {
+		
+		return session.selectOne("file.getData", num);
+	}
+
+	@Override
+	public void delete(int num) {
+		session.delete("file.delete", num);
+		
+	}
+
+	@Override
+	public int getCount() {
+		
+		return session.selectOne("file.getCount");
 	}
 
 }
