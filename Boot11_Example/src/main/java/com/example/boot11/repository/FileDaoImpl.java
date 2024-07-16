@@ -51,7 +51,7 @@ public class FileDaoImpl implements FileDao{
 	}
 
 	@Override
-	public int getCount() {
+	public int getCount(FileDto dto) {
 		
 		return session.selectOne("file.getCount");
 	}
