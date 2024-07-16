@@ -4,20 +4,9 @@
 
 	<update id="update" parameterType="com.example.boot11.dto.UserDto">
 		UPDATE user_tbl
-		SET email=#{email} <if test="profile != null">, profile=#{profile}</if>
+		SET email=#{email} <if test="profile != null">,profile=#{profile}</if>
 		WHERE userName=#{userName}
 	</update>
-
-	<select id="getData" parameterType="String" resultType="com.example.boot11.dto.UserDto">
-		SELECT id, userName, password, email, role, profile, regdate
-		FROM user_tbl
-		WHERE userName=#{userName}
-	</select>
-	
-	<insert id="insert" parameterType="com.example.boot11.dto.UserDto">
-		INSERT INTO user_tbl (id, userName, password, email, role, regdate)
-		VALUES (user_seq.NEXTVAL, #{userName}, #{password}, #{email}, #{role}, SYSDATE)
-	</insert>
 	
 	<update id="updatePwd" parameterType="com.example.boot11.dto.UserDto">
 		UPDATE user_tbl
@@ -25,9 +14,16 @@
 		WHERE userName=#{userName}
 	</update>
 	
-	<select id="getPrePwd" parameterType="String" resultType="com.example.boot11.dto.UserDto">
-		SELECT password
+	<insert id="insert" parameterType="com.example.boot11.dto.UserDto">
+		INSERT INTO user_tbl
+		(id, userName, password, email, role, regdate)
+		VALUES(user_seq.NEXTVAL, #{userName}, #{password}, #{email}, #{role}, SYSDATE)
+	</insert>
+	
+	<select id="getData" parameterType="string" resultType="com.example.boot11.dto.UserDto">
+		SELECT id, userName, password, email, role, profile, regdate
 		FROM user_tbl
 		WHERE userName=#{userName}
 	</select>
+	
 </mapper>

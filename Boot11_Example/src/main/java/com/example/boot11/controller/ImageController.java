@@ -33,5 +33,15 @@ public class ImageController {
 		InputStream is=new FileInputStream(absolutePath);
 		// commons io 에 있는 IOUtils 클래스를 이용해서 이미지 파일에서 byte[] 을 얻어낸다 
 		return IOUtils.toByteArray(is);
-	}
+	}	
 }
+
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,4 @@ public interface UserDao {
 	public void insert(UserDto dto);
 	public void updatePwd(UserDto dto);
 	public void update(UserDto dto);
-	
-	public UserDto getPrePwd(String userName);
 }

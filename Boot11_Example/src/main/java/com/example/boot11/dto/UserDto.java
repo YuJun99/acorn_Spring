@@ -8,7 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /*
-  CREATE TABLE user_tbl
+ 
+ CREATE TABLE user_tbl
   (id NUMBER PRIMARY KEY,
   	userName VARCHAR2(20) UNIQUE,
   	password VARCHAR2(100) NOT NULL,
@@ -17,81 +18,36 @@ import lombok.NoArgsConstructor;
    	profile VARCHAR2(100),
    	regdate DATE
   );
-   
-   CREATE SEQUENCE user_seq;
-*/
-@Builder // .action().action2()... 형태로 객체를 만들수 있게 해준다.
-@AllArgsConstructor // 모든 인자를 전달받는 생성자
+
+  CREATE SEQUENCE user_seq;
+  
+ */
+
+
+
+@Builder  // .action().action2()... 형태로 객체를 만들수 있게 해준다. 
+@AllArgsConstructor //모든 인자를 전달받는 생성자
 @NoArgsConstructor //default 생성자
-@Data //setter, getter 메소드 등을 만들어 준다.
+@Data  // setter, getter 메소드 등을 만들어준다.
 public class UserDto {
-	//숫자로된 아이디는 PK
+	//숫자로된 아이디는 PK 
 	private int id;
 	//사용자명 은 중복된 데이터가 들어가지 않도록 UNIQUE KEY 를 설정해야 한다
 	private String userName;
 	private String password;
 	private String newPassword;
 	private String email;
-	//Authority 정보를 저장할 칼럼 ADMIN | STAFF | USER 형식이다.
+	//Authority 정보를 저장할 칼럼 ROLE_XXX 형식이다. 
 	private String role;
 	private String profile;
 	private String regdate;
-	//프로필 이미 파일 업로드 처리를 하기 위한 필드
-	private MultipartFile image; // <input type = "file" name="image" > 임으로 필드명이 image 이다.
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getNewPassword() {
-		return newPassword;
-	}
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public String getRole() {
-		return role;
-	}
-	public void setRole(String role) {
-		this.role = role;
-	}
-	public String getProfile() {
-		return profile;
-	}
-	public void setProfile(String profile) {
-		this.profile = profile;
-	}
-	public String getRegdate() {
-		return regdate;
-	}
-	public void setRegdate(String regdate) {
-		this.regdate = regdate;
-	}
-	public MultipartFile getImage() {
-		return image;
-	}
-	public void setImage(MultipartFile image) {
-		this.image = image;
-	}
-	
-	
+	//프로필 이미지 파일 업로그 처리를 하기 위한 필드
+	private MultipartFile image; // <input type="file" name="image" > 임으로 필드명이 image 이다.
 }
+
+
+
+
+
+
+

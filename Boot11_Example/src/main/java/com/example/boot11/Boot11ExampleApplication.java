@@ -5,11 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
 
 /*
- *	@PropertySource(value=" 커스텀 properties 파일의 위치") 
+ *  @PropertySource(value=" 커스텀 properties 파일의 위치" )
  *  classpath: 는 resources 폴더를 가리킨다.
  */
 @PropertySource(value="classpath:custom.properties")
-
 @SpringBootApplication
 public class Boot11ExampleApplication {
 

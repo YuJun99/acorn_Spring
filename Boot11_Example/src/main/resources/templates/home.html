@@ -2,19 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>home.html</title>
+<title>/home.html</title>
 </head>
 <body>
 	<div class="container">
 		<div sec:authorize="isAuthenticated()">
-			<a sec:authentication="name" th:href="@{/user/info}"></a> 님 로그인 중
+			<a sec:authentication="name" th:href="@{/user/info}"></a> 님 로그인중
 			<a th:href="@{/user/logout}">로그아웃</a>
 		</div>
 		<div sec:authorize="!isAuthenticated()">
 			<a th:href="@{/user/signup_form}">회원가입</a>
 			<a th:href="@{/user/loginform}">로그인</a>
 		</div>
-		
+	
 		<h1>인덱스 페이지 입니다</h1>
 		<ul>
 			<li><a th:href="@{/file/list}">자료실 목록보기</a></li>
@@ -27,3 +27,9 @@
 	</div>
 </body>
 </html>
+
+
+
+
+
+

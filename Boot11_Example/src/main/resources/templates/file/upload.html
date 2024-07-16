@@ -5,9 +5,12 @@
 <title>/file/upload.html</title>
 </head>
 <body>
-<script>
-	alert("업로드가 완료되었습니다");
-	location.href="[[@{/file/list}]]";
-</script>
+	<div class="container">
+		<h3>알림</h3>
+		<p>
+			파일이 업로드 되었습니다.
+			<a th:href="@{/file/list}">목록보기</a>
+		</p>
+	</div>
 </body>
 </html>
