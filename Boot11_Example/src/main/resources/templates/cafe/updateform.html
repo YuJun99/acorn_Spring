@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>/cafe/updateform.html</title>
+</head>
+<body>
+	<div class="container">
+		<form th:action="@{/cafe/update}" method="post">
+			<div>
+				<label for="writer">작성자</label>
+				<input type="text" id="writer" th:value="${dto.writer}" readonly/>
+			</div>
+			<div>
+				<label for="title">제목</label>
+				<input type="text" id="title" th:value="${dto.title}"/>
+			</div>
+			<div>
+				<label for="content">내용</label>
+				<input type="text" id="content" th:value="${dto.content}"/>
+			</div>
+			<button type="submit">수정</button>
+			<button type="reset">취소</button>
+		</form>
+	</div>
+</body>
+</html>
