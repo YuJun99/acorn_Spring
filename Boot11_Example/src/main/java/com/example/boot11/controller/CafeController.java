@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.boot11.dto.CafeCommentDto;
 import com.example.boot11.dto.CafeDto;
 import com.example.boot11.service.CafeService;
 
@@ -14,22 +15,32 @@ public class CafeController {
 	
 	@Autowired private CafeService service;
 	
-	@PostMapping("/cafe/update")
-	public String update(CafeDto dto) {
-		service.updateContent(dto);
+	@PostMapping("/cafe/comment_insert")
+	public String comment_insert(CafeCommentDto dto) {
+		service.saveComment(dto);
 		return "home";
 	}
 	
+	@PostMapping("/cafe/update")
+	public String update(CafeDto dto) {
+		//서비스객체를 이용해서 수정 반영하고
+		service.updateContent(dto);
+		//해당글 자세히 보기로 리다일렉트 이동 (GET 방식 parameter 로 글번호도 전달해야 한다)
+		return "redirect:/cafe/detail?num="+dto.getNum();
+	}
+	
 	@GetMapping("/cafe/updateform")
-	public String updateform(Model model, int num) {
+	public String updateform(Model model,int num) {
+		//수정할 글정보를 Model 객체에 담아주는 서비스 메소드
 		service.getData(model, num);
 		return "cafe/updateform";
 	}
 	
 	@GetMapping("/cafe/delete")
-	public String delete(int num) {
+	public String delete(int num) { // /cafe/delete?num=x
+		//서비스 메소드를 이용해서 삭제하기
 		service.deleteContent(num);
-		return "home";
+		return "redirect:/cafe/list";
 	}
 	
 	@GetMapping("/cafe/detail")

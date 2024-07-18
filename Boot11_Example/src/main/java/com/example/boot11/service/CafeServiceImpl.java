@@ -2,13 +2,15 @@ package com.example.boot11.service;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import com.example.boot11.dto.CafeCommentDto;
 import com.example.boot11.dto.CafeDto;
+import com.example.boot11.exception.NotOwnerException;
+import com.example.boot11.repository.CafeCommentDao;
 import com.example.boot11.repository.CafeDao;
 
 @Service
@@ -20,6 +22,7 @@ public class CafeServiceImpl implements CafeService {
 	
 	//DI
 	@Autowired private CafeDao CafeDao;
+	@Autowired private CafeCommentDao commentDao;
 	
 	@Override
 	public void getList(Model model, CafeDto dto) {
@@ -85,22 +88,67 @@ public class CafeServiceImpl implements CafeService {
 
 	@Override
 	public void deleteContent(int num) {
-		CafeDao.delete(num);
+		//글 작성자와
+		String writer = CafeDao.getData(num).getWriter();
+		//로그인된 사용자와 같은 경우에만 삭제
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		//만일 일치하지 않으면 예외(NotOwnerException) 발생시키기
+		if(!writer.equals(userName)) {
+			throw new NotOwnerException("사용자가 일치하지 않습니다.");	
+		}
+		//DB 에서 num 에 해당하는 글 삭제하기
+		else {
+			CafeDao.delete(num);
+		}
 		
 	}
 
 	@Override
 	public void getData(Model model, int num) {
+		//num 을 이용해서 글정보를 얻어와서
 		CafeDto dto = CafeDao.getData(num);
-		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-		dto.setWriter(userName);
+		//Model 객체에 담는다.
 		model.addAttribute("dto", dto);
 	}
 
 	@Override
 	public void updateContent(CafeDto dto) {
-		CafeDto dto = CafeDao.getData(PAGE_DISPLAY_COUNT)
+		//글 작성자와
+		String writer = CafeDao.getData(dto.getNum()).getWriter();
+		//로그인된 사용자와 같은 경우에만 삭제
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		//만일 일치하지 않으면 예외(NotOwnerException) 발생시키기
+		if(!writer.equals(userName)) {
+			throw new NotOwnerException("사용자가 일치하지 않습니다.");	
+		}
+		//DB 에서 글 수정
 		CafeDao.update(dto);
+	}
+
+	@Override
+	public void saveComment(CafeCommentDto dto) {
+		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+		dto.setWriter(userName);
+		dto.setNum(commentDao.getSequence());
+		commentDao.insert(dto);
+	}
+
+	@Override
+	public void deleteComment(int num) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateComment(CafeCommentDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void getCommentList(Model model, CafeCommentDto dto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
