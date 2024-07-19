@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.example.boot02.dto.MemberDto;
 /*
@@ -85,7 +86,7 @@ public class HomeController {
 		
 		return "동쪽으로 가면 귀인을 만나요";
 	}
-	
+
 }
 
 

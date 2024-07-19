@@ -14,11 +14,17 @@ import com.example.boot11.service.CafeService;
 public class CafeController {
 	
 	@Autowired private CafeService service;
-	
+	/*
+	 * CafeCommentDto 에는 ref_group, target_id, content 3개의 정보가 들어 있다.
+	 * 
+	 * ( 대댓글인 경우에는 comment_group 번호도 같이 넘어온다 )
+	 */
 	@PostMapping("/cafe/comment_insert")
 	public String comment_insert(CafeCommentDto dto) {
+		//댓글 저장 처리를 하고
 		service.saveComment(dto);
-		return "home";
+		//해당글 자세히 보기로 다시 리다일렉트 시킨다
+		return "redirect:/cafe/detail?num="+dto.getRef_group();
 	}
 	
 	@PostMapping("/cafe/update")
