@@ -11,11 +11,10 @@
 <body>
     <div class="container" id="app">
         <h1>페이지 전환 없이 fetch 함수로 요청을 해서 응답되는 데이터 사용하기</h1>
-        <button @click="getPosts">posts 목록 받아오기</button>
         <br>
         <form action="/posts" method="post" @submit="onSubmit">
-            <input type="text" name="title" placeholder="제목..">
-            <input type="text" name="author" placeholder="작성자..">
+            <input type="text" name="title" placeholder="제목...">
+            <input type="text" name="author" placeholder="작성자...">
             <button type="submit">글 저장</button>
         </form>
         <h3>posts 입니다</h3>
@@ -62,64 +61,66 @@
                 </div>
               </div>
             </div>
-        </div>
+        </div>        
     </div>
-    <script>
+    <script>   
+        
         new Vue({
             el:"#app",
             mounted(){
                 //무언가 준비 작업을 할게 있으면 이 함수 안에서 하면된다.
-                console.log("Vue js 가 준비 되었습니다.")
+                console.log("Vue js 가 준비 되었습니다.");
                 //글목록 받아오는 함수 호출
                 this.getPosts();
             },
             data:{
                 posts:[],
                 currentId:0,
-                currentTitle:"",
-                currentAuthor:""
+                currentTitle:"xxx",
+                currentAuthor:"yyy"
             },
             methods:{
                 onUpdate(id){
                     //id 에 해당하는 수정할 글의 정보를 서버로 부터 응답 받는다.
-                    //GET /posts/id
+                    // GET  /posts/id
                     fetch("/posts/"+id)
                     .then(res=>res.json())
                     .then(data=>{
-                        //data 는 글 하나의 정보가 들어 있는 object 이다.
-                         //모달 띄우기
-                        const modal = new bootstrap.Modal('#updateModal', {})
+                        //data 는 글하나의 정보가 들어 있는 object 이다.
+                        //모달 띄우기
+                        const modal = new bootstrap.Modal('#updateModal', {});
                         modal.show();
 
-                        this.currentId= id;
-                        this.currentTitle= data.title;
-                        this.currentAuthor= data.author;
-                    })
+                        this.currentId=id;
+                        this.currentTitle=data.title;
+                        this.currentAuthor=data.author;
+                    });
                    
                 },
                 onSave(){
                     //요청의 body 에 전달할 query 문자열 만들기
                     const queryString = `title=${this.currentTitle}&author=${this.currentAuthor}`;
-                    console.log("현재 posts");
+                    console.log("현재 posts 내용");
                     console.log(this.posts);
-                    //PUT /posts/id
+                    // PUT  /posts/id
                     fetch("/posts/"+this.currentId, {
                         method:"PUT",
                         headers:{"Content-Type":"application/x-www-form-urlencoded; charset=utf-8"},
-                        body: queryString
+                        body:queryString
                     })
                     .then(res=>res.json())
                     .then(data=>{
                         //응답된 데이터는 수정된 데이터 이다
                         console.log(data);
-                        const result = this.posts.map(item=> itme.id == data.id ? data : item);
-                            //얻어낸 새로운 배열로 모델 변경
-                            this.posts=result;
+                        //this.getPosts();
+                        const result = this.posts.map(item => item.id==data.id ? data : item);
+                        //얻어낸 새로운 배열로 모델 변경
+                        this.posts=result;
                     });
                 },
                 onDelete(id){
                     console.log(id+" 번 글을 삭제합니다");
-                    fetch("/posts/" + id, {
+                    fetch("/posts/"+id, {
                         method:"DELETE"
                     })
                     .then(res=>res.json())
@@ -132,10 +133,11 @@
                     e.preventDefault();
                     //fetch 함수를 이용해서 폼에 입력한 내용을 POST 방식 "/posts" 요청을 하면서 전송하기
                     //전송할 폼 데이터
-                    const formData = new FormData(e.target);
-                    //폼에 입력한 데이터를 이용해서 query string 만들어 내기
-                    const queryString = new URLSearchParams(formData).toString();
-                    fetch("/posts",{
+                    const formData=new FormData(e.target);
+                    //폼에 입력한 데이터를 이용해서 query string 만들어 내기 
+                    const queryString=new URLSearchParams(formData).toString();
+                    
+                    fetch("/posts", {
                         method:"POST",
                         headers:{"Content-Type":"application/x-www-form-urlencoded; charset=utf-8"},
                         body:queryString
@@ -145,17 +147,17 @@
                         console.log(data);
                         //글목록 다시 받아오기
                         this.getPosts();
-                    })
+                    });
                 },
                 getPosts(){
-                    // 1. GET 방식 /posts 요청을 하면
+                    // 1. GET 방식 /posts 요청을 하면   
                     fetch("/posts")
                     .then(res=>res.json()) //2. json 문자열이 응답되고 [{},{},{},...]
                     .then(data=>{
                         //3. data 는 json 문자열이 실제 javascript 배열이나 object 로 변경된 데이터이다
                         console.log(data);
                         //응답된 배열을 모델에 덮어쓰기 (UI 자동 update)
-                        this.posts = data;
+                        this.posts=data;
                     });
                 }
             }
