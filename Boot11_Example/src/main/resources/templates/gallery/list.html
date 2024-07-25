@@ -14,8 +14,8 @@
             <div class="col-sm-6 col-md-4 col-lg-3">
             	
             	<div th:each="tmp : ${list}" class="card-body" >
-            		<a href="자세히보기 url">
-            			<img th:src="@{${filePath} + '' + ${tmp.saveFileName}}"/>
+            		<a th:href="@{/gallery/detail?(num=${tmp.num})}">
+            			<img th:src="@{${filePath} + '' +${tmp.saveFileName} + '.jpg'}"/>
             		</a>
                 	<p class="card-text" th:text="${tmp.caption}"></p>
                 	<p class="card-text">by <strong>[[${tmp.writer}]]</strong></p>

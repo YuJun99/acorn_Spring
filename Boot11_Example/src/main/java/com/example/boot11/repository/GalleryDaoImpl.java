@@ -25,4 +25,22 @@ public class GalleryDaoImpl implements GalleryDao{
 		return session.selectList("gallery.getList", dto);
 	}
 
+	@Override
+	public GalleryDto getData(int num) {
+		
+		return session.selectOne("gallery.getData", num);
+	}
+
+	@Override
+	public void delete(int num) {
+		
+		session.delete("gallery.delete", num);
+	}
+
+	@Override
+	public void update(GalleryDto dto) {
+		
+		session.update("gallery.update", dto);
+	}
+
 }

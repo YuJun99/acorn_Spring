@@ -11,4 +11,20 @@
 		FROM board_gallery
 	</select>
 	
+	<select id="getData" parameterType="int" resultType="com.example.boot11.dto.GalleryDto">
+		SELECT num, writer, caption, saveFileName, regdate
+		FROM board_gallery
+		WHERE num = #{num }
+	</select>
+	
+	<delete id="delete" parameterType="com.example.boot11.dto.GalleryDto">
+		DELETE FROM board_gallery
+		WHERE num = #{num }
+	</delete>
+	
+	<update id="update" parameterType="com.example.boot11.dto.GalleryDto" >
+		UPDATE board_gallery
+		SET saveFileName = #{saveFileName }, caption = #{caption }, regdate = SYSDATE
+		WHERE num = #{num }
+	</update>
 </mapper>

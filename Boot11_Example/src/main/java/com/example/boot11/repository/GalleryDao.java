@@ -7,4 +7,7 @@ import com.example.boot11.dto.GalleryDto;
 public interface GalleryDao {
 	public void insert(GalleryDto dto);
 	public List<GalleryDto> getList(GalleryDto dto);
+	public GalleryDto getData(int num);
+	public void delete(int num);
+	public void update(GalleryDto dto);
 }

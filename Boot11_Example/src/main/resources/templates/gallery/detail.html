@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>/gallery/detail.html</title>
+</head>
+<body>
+	<h3>이미지 상세보기</h3>
+	<table class="table table-bordered" >
+		<tr>
+			<th>번호</th>
+			<td>[[${dto.num}]]</td>
+		</tr>
+		<tr>
+			<th>작성자</th>
+			<td>[[${dto.writer}]]</td>
+		</tr>
+		<tr>
+			<th>이미지</th>
+			<td><img th:src="@{${filePath} + '' + ${dto.saveFileName} + '.jpg'}" /></td>
+		</tr>
+		<tr>
+			<th>캡션</th>
+			<td>[[${dto.caption}]]</td>	
+		</tr>
+		<tr>
+			<th>등록일</th>
+			<td th:text="${dto.regdate}"></td>
+		</tr>
+	</table>
+	<a th:href="@{/gallery/updateform?(num=${dto.num})}">수정</a>
+	<a th:href="@{/gallery/delete?(num=${dto.num})}">삭제</a>
+</body>
+</html>

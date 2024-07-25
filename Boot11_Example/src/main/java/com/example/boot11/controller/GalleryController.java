@@ -31,4 +31,28 @@ public class GalleryController {
 		service.saveImage(image, dto);
 		return "redirect:/gallery/list";
 	}
+	
+	@GetMapping("/gallery/detail")
+	public String detail(int num, Model model) {
+		service.getData(num, model);
+		return "gallery/detail";
+	}
+	
+	@GetMapping("/gallery/delete")
+	public String delete(int num) {
+		service.deleteImage(num);
+		return "redirect:/gallery/list";
+	}
+	
+	@GetMapping("/gallery/updateform")
+	public String updateForm(int num, Model model) {
+		service.getData(num, model);
+		return "gallery/updateform";
+	}
+	
+	@PostMapping("/gallery/update")
+	public String update(MultipartFile image, GalleryDto dto) {
+		service.updateImage(image, dto);
+		return "redirect:/gallery/list";
+	}
 }

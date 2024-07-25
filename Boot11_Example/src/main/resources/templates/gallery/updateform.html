@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>/gallery/updateform.html</title>
+</head>
+<body>
+	<div class="container">
+		<h2>이미지 수정 페이지</h2>
+		<form th:action="@{/gallery/update}" method = "post" enctype="multipart/form-data">
+			<table>
+			<thead>
+				<tr>
+					<th>번호</th>
+					<td>
+						<input type="text" th:value="${dto.num}" readonly/>
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="writer">작성자</label>
+					</th>
+					<td><input type="text" name="writer" id="writer" th:value="${dto.writer}" readonly/></td>
+				</tr>
+				<tr>
+					<th>
+						<label for="saveFileName">이미지</label>
+					</th>
+					<td>
+						<input type="file" name="saveFileName" id="saveFileName"/>
+						<img th:src="@{${filePath} + '' + ${dto.saveFileName} + '.jpg'}" />
+					</td>
+				</tr>
+				<tr>
+					<th>
+						<label for="caption">캡션</label>
+					</th>
+					<td><input type="text" name="caption" id="caption" th:value="${dto.caption}"/></td>
+				</tr>
+			</thead>
+		</table>
+		
+			<button type="submit">수정</button>
+			<button type="reset">취소</button>
+		</form>
+	</div>
+</body>
+</html>
