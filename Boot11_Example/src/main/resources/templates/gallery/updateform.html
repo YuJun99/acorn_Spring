@@ -24,10 +24,10 @@
 				</tr>
 				<tr>
 					<th>
-						<label for="saveFileName">이미지</label>
+						<label for="image">이미지</label>
 					</th>
 					<td>
-						<input type="file" name="saveFileName" id="saveFileName"/>
+						<input type="file" name="image" id="image"/>
 						<img th:src="@{${filePath} + '' + ${dto.saveFileName} + '.jpg'}" />
 					</td>
 				</tr>

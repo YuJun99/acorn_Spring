@@ -10,5 +10,5 @@ public interface GalleryService {
 	public void saveImage(MultipartFile image, GalleryDto dto);
 	public void getData(int num, Model model);
 	public void deleteImage(int num);
-	public void updateImage(MultipartFile image, GalleryDto dto);
+	public void updateImage(GalleryDto dto, MultipartFile image, int num);
 }

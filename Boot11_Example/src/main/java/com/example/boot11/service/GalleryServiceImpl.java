@@ -74,8 +74,8 @@ public class GalleryServiceImpl implements GalleryService{
 	}
 
 	@Override
-	public void updateImage(MultipartFile image, GalleryDto dto) {
-		String writer = dao.getData(dto.getNum()).getWriter();
+	public void updateImage(GalleryDto dto, MultipartFile image, int num) {
+		String writer = dao.getData(num).getWriter();
 		String userName = SecurityContextHolder.getContext().getAuthentication().getName();
 		
 		if(!writer.equals(userName)) {

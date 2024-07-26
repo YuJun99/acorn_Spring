@@ -51,8 +51,8 @@ public class GalleryController {
 	}
 	
 	@PostMapping("/gallery/update")
-	public String update(MultipartFile image, GalleryDto dto) {
-		service.updateImage(image, dto);
+	public String update(GalleryDto dto, MultipartFile image, int num ) {
+		service.updateImage(dto, image, num);
 		return "redirect:/gallery/list";
 	}
 }
