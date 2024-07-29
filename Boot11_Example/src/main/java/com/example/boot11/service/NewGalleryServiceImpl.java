@@ -38,24 +38,28 @@ public class NewGalleryServiceImpl implements NewGalleryService{
 
 		//1. 업로드된 파일 저장
 		//저장할 파일의 이름 겹치지 않는 유일한 문자열로 얻어내기
-		String saveFileName=UUID.randomUUID().toString();
-		//저장할 파일의 전체 경로 구성하기
-		String filePath=fileLocation+File.separator+saveFileName;
-		try {
-			//업로드된 파일을 이동시킬 목적지 File 객체
-			File f=new File(filePath);
-			//MultipartFile 객체의 메소드를 통해서 실제로 이동시키기(전송하기)
-			dto.getImage().transferTo(f);
-		}catch(Exception e) {
-			e.printStackTrace();
+		for (int i = 0; i < dto.getImages().length; i++) {
+			String saveFileName=UUID.randomUUID().toString();
+			//저장할 파일의 전체 경로 구성하기
+			String filePath=fileLocation+File.separator+saveFileName;
+			try {
+				//업로드된 파일을 이동시킬 목적지 File 객체
+				File f=new File(filePath);
+				//MultipartFile 객체의 메소드를 통해서 실제로 이동시키기(전송하기)
+				//dto.getImage().transferTo(f);
+				dto.getImages()[i].transferTo(f);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			//2. 로그인된 사용자(userName) 읽어오기
+			String userName=SecurityContextHolder.getContext().getAuthentication().getName();
+			//3. GalleryDto 에 추가 정보를 담고
+			dto.setSaveFileName(saveFileName);
+			dto.setWriter(userName);
+			//4. DB 에 저장하기
+			dao.insert(dto);
 		}
-		//2. 로그인된 사용자(userName) 읽어오기
-		String userName=SecurityContextHolder.getContext().getAuthentication().getName();
-		//3. GalleryDto 에 추가 정보를 담고
-		dto.setSaveFileName(saveFileName);
-		dto.setWriter(userName);
-		//4. DB 에 저장하기
-		dao.insert(dto);
+		
 	}
 
 	@Override
