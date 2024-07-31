@@ -40,7 +40,7 @@ public class JwtTestController {
 	@PostMapping("/api/test/login")
 	public String apiLogin() {
 		//토큰을 발급해서 쿠키로
-		String jwtToken = jwtUtil.generateToken("kimgura");
+		String jwtToken = jwtUtil.generateToken("batman");
 		return "Bearer+"+jwtToken;
 	}
 	
