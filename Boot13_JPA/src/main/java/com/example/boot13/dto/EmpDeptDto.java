@@ -17,6 +17,7 @@ public class EmpDeptDto {
 	private int deptno;
 	private String dname;
 	private String loc;
+	
 	private double sal;
 	
 	public static EmpDeptDto toDto(Emp emp) {
@@ -29,6 +30,7 @@ public class EmpDeptDto {
 				.deptno(emp.getDept().getDeptno())
 				.dname(emp.getDept().getDname())
 				.loc(emp.getDept().getLoc())
+				
 				.build();
 	}
 }

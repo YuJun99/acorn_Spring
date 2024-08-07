@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,8 +38,7 @@ public class TestController {
 		long fileSize;
 	}
 	
-	@Setter
-	@Getter
+	@Data
 	class UploadRequest{
 		String title;
 		MultipartFile image;

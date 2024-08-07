@@ -22,8 +22,8 @@ import lombok.Setter;
 @Entity(name="PHONE_INFO") //테이블명
 public class Phone {
 	// id 라는 칼럼은 primary key 값으로 설정되도록 하겠다
-	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
 	private long id; //필드명이 칼럼명이 된다.
 	private String company;
 	private String name;

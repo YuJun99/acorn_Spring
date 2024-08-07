@@ -37,46 +37,46 @@ public class Boot13JpaApplication {
 	EmpRepository empRepo;
 	
 	@PostConstruct
-	public void init() {
-		// 이 객체를 (객체 안에 있는 정보) 영속화(persistance) 즉 영구 저장하고 싶다!
-		Phone p1 = Phone.builder().name("아이폰15").company("APPLE").price(150).build();
-		Phone p2 = Phone.builder().name("갤럭시S24").company("SAMSUNG").price(130).build();
-		Phone p3 = Phone.builder().name("아이폰16").company("APPLE").price(200).build();
-		Phone p4 = Phone.builder().name("갤럭시S25").company("SAMSUNG").price(170).build();
-		
-		//EntityManager 객체 얻어내서
-		EntityManager em = emf.createEntityManager();
-		//하나의 트랜잭션을 시작한다
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-		try {
-			//EntityManager 객체의 메소드를 이용해서 저장한다.
-			em.persist(p1);
-			em.persist(p2);
-			tx.commit();
-		}catch(Exception e) {
-			e.printStackTrace();
-			tx.rollback();
-		}finally {
-			em.close();
-		}
-		
-		phoneRepo.save(p3);
-		phoneRepo.save(p4);
-		
-		List<Phone> phoneList= phoneRepo.findAll();
-		for(Phone tmp : phoneList) {
-			System.out.println(tmp.getId() + " | " + tmp.getName() + " | " + tmp.getCompany());
-		}
-		
-		List<PhoneDto> list = phoneRepo.findAll().stream().map(PhoneDto :: toDto).toList();
-		for(PhoneDto tmp : list) {
-			// PhoneDto 는 @Data 어노테이션이 있어서 객체를 직접 출력해도 구조는 확인할 수 있다.
-			System.out.println(tmp);
-		}
-		//아래 메소드를 호출
-		initEmpDept();
-	}
+//	public void init() {
+//		// 이 객체를 (객체 안에 있는 정보) 영속화(persistance) 즉 영구 저장하고 싶다!
+//		Phone p1 = Phone.builder().name("아이폰15").company("APPLE").price(150).build();
+//		Phone p2 = Phone.builder().name("갤럭시S24").company("SAMSUNG").price(130).build();
+//		Phone p3 = Phone.builder().name("아이폰16").company("APPLE").price(200).build();
+//		Phone p4 = Phone.builder().name("갤럭시S25").company("SAMSUNG").price(170).build();
+//		
+//		//EntityManager 객체 얻어내서
+//		EntityManager em = emf.createEntityManager();
+//		//하나의 트랜잭션을 시작한다
+//		EntityTransaction tx = em.getTransaction();
+//		tx.begin();
+//		try {
+//			//EntityManager 객체의 메소드를 이용해서 저장한다.
+//			em.persist(p1);
+//			em.persist(p2);
+//			tx.commit();
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//			tx.rollback();
+//		}finally {
+//			em.close();
+//		}
+//		
+//		phoneRepo.save(p3);
+//		phoneRepo.save(p4);
+//		
+//		List<Phone> phoneList= phoneRepo.findAll();
+//		for(Phone tmp : phoneList) {
+//			System.out.println(tmp.getId() + " | " + tmp.getName() + " | " + tmp.getCompany());
+//		}
+//		
+//		List<PhoneDto> list = phoneRepo.findAll().stream().map(PhoneDto :: toDto).toList();
+//		for(PhoneDto tmp : list) {
+//			// PhoneDto 는 @Data 어노테이션이 있어서 객체를 직접 출력해도 구조는 확인할 수 있다.
+//			System.out.println(tmp);
+//		}
+//		//아래 메소드를 호출 (Oracle DB 를 사용할때는 주석처리 h2 DB 에만 가능 )
+////		initEmpDept();
+//	}
 
 	public void initEmpDept() {
 		/*
