@@ -35,7 +35,7 @@ public class JPQLTestController {
 	public List<Object[]> oracle(String query){
 		/*
 		 * 	select 된 row 하나의 정보를 Object[] 에 담고
-		 * 	row 가 여러개이니까 Objectp[] 객체가 여러개가 필요하고
+		 * 	row 가 여러개이니까 Object[] 객체가 여러개가 필요하고
 		 * 	해당 객체를 모두 List 에 담으면 List<Object[]> type 이 된다.
 		 */
 		List<Object[]> list = null;
