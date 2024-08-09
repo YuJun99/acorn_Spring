@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newgallery">
+	<insert id="insert" parameterType="com.example.boot14.dto.GalleryDto">
+		INSERT INTO board_gallery(num, writer, caption, saveFileName, regdate)
+		VALUES (board_gallery_seq.nextval, #{writer }, #{caption }, #{saveFileName }, SYSDATE)
+	</insert>
+	
+	<select id="getData" parameterType="int" resultType="com.example.boot14.dto.GalleryDto">
+		SELECT *
+		FROM
+			(SELECT num, writer, caption, saveFileName, regdate, 
+				LAG(num, 1, 0) OVER (ORDER BY num DESC) AS prevNum,
+				LEAD(num, 1, 0) OVER (ORDER BY num DESC) AS nextNum
+			FROM board_gallery
+			order by num desc)
+		WHERE num= #{num}
+	</select>
+	
+	<select id="getCount" resultType="int">
+		SELECT NVL(MAX(ROWNUM), 0)
+		FROM board_gallery
+	</select>
+	
+	<select id="getList" parameterType="com.example.boot14.dto.GalleryDto" resultType="com.example.boot14.dto.GalleryDto">
+		SELECT *
+		FROM
+			(SELECT result1.*, ROWNUM AS rnum
+			FROM
+				(SELECT num, writer, caption, saveFileName, regdate
+				FROM board_gallery
+				ORDER BY num DESC) result1)
+		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM board_gallery
+		WHERE num = #{num }
+	</delete>
+</mapper>
